@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailCell: UITableViewCell {
-    static let identifier = "DetailCell"
+    static let identifier = String(describing: DetailCell.self)
     
     private let nameLabel: UILabel = {
         let label = UILabel()

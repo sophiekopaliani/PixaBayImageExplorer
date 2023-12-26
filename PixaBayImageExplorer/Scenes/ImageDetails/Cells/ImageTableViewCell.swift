@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class ImageTableViewCell: UITableViewCell {
-    static let identifier = "ImageCell" //TODO: identifier
+    static let identifier = String(describing: ImageTableViewCell.self)
 
     private let placeholderImage = UIImage(systemName: "photo.fill")?
         .withTintColor(.systemGray6, renderingMode: .alwaysOriginal)
@@ -87,7 +87,7 @@ class ImageTableViewCell: UITableViewCell {
         guard let item else { return }
         imageSizeLabel.text = "Size: \(item.imageSize)"
         imageTypeLabel.text = "Type: \(item.type.rawValue)"
-        productImageView.sd_setImage(with: URL(string: item.fullSizeURL ?? ""),
+        productImageView.sd_setImage(with: item.fullSizeURL,
                                      placeholderImage: placeholderImage)
     }
 }

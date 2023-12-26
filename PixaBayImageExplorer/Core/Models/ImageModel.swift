@@ -17,9 +17,9 @@ struct Image: Hashable {
     let user: String
     let comments: Int
     let downloads: Int
-    let userImageURL: String?
-    let previewURL: String?
-    let fullSizeURL: String?
+    let userImageURL: URL?
+    let previewURL: URL?
+    let fullSizeURL: URL?
     
     enum ImageType: String {
         case photo
@@ -43,8 +43,8 @@ extension Image {
         self.user = api.user ?? "Unknown"
         self.comments = api.comments ?? 0
         self.downloads = api.downloads ?? 0
-        self.userImageURL = api.userImageURL
-        self.previewURL = api.imageURL ?? api.previewURL
-        self.fullSizeURL = api.largeImageURL ?? self.previewURL
+        self.userImageURL = URL(string: api.userImageURL ?? "")
+        self.previewURL = URL(string: api.imageURL ?? api.previewURL ?? "")
+        self.fullSizeURL = URL(string: api.largeImageURL ?? api.previewURL ?? "" )
     }
 }

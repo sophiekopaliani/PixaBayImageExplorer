@@ -8,7 +8,7 @@
 import UIKit
 
 class TagsCell: UITableViewCell {
-    static let identifier = "TagsCell" //TODO: identifier
+    static let identifier = String(describing: TagsCell.self)
     
     private let badge: Badge = {
         let b = Badge()

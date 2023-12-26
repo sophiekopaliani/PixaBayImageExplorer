@@ -79,9 +79,9 @@ class ImageDetailsController: UIViewController {
     }
     
     private func setupCollectionView() {
-//        tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
+        tableView.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         tableView.register(TagsCell.self, forCellReuseIdentifier: TagsCell.identifier)
-//        tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.identifier)
+        tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.identifier)
     }
     
     func updateDataSource() {
