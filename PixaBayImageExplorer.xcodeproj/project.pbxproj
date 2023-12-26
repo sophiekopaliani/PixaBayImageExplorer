@@ -11,6 +11,12 @@
 		2D460B072B3B1106004E3B35 /* DataTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B062B3B1106004E3B35 /* DataTransport.swift */; };
 		2D460B092B3B1127004E3B35 /* DataTransportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B082B3B1127004E3B35 /* DataTransportService.swift */; };
 		2D460B0B2B3B1156004E3B35 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B0A2B3B1156004E3B35 /* ServiceError.swift */; };
+		2D460B0F2B3B1DE6004E3B35 /* ImagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B0E2B3B1DE6004E3B35 /* ImagesUseCase.swift */; };
+		2D460B122B3B1E05004E3B35 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 2D460B112B3B1E05004E3B35 /* Resolver */; };
+		2D460B142B3B1E1D004E3B35 /* ImagesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B132B3B1E1D004E3B35 /* ImagesGateway.swift */; };
+		2D460B172B3B1E93004E3B35 /* Resolver + Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B162B3B1E93004E3B35 /* Resolver + Injection.swift */; };
+		2D460B1A2B3B1EEF004E3B35 /* ApiImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B192B3B1EEF004E3B35 /* ApiImages.swift */; };
+		2D460B1D2B3B1F49004E3B35 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B1C2B3B1F49004E3B35 /* ImageModel.swift */; };
 		2DF11C7E2B3AAE4A009D5EE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7D2B3AAE4A009D5EE4 /* AppDelegate.swift */; };
 		2DF11C802B3AAE4A009D5EE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7F2B3AAE4A009D5EE4 /* SceneDelegate.swift */; };
 		2DF11C822B3AAE4A009D5EE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C812B3AAE4A009D5EE4 /* ViewController.swift */; };
@@ -23,6 +29,11 @@
 		2D460B062B3B1106004E3B35 /* DataTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransport.swift; sourceTree = "<group>"; };
 		2D460B082B3B1127004E3B35 /* DataTransportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransportService.swift; sourceTree = "<group>"; };
 		2D460B0A2B3B1156004E3B35 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		2D460B0E2B3B1DE6004E3B35 /* ImagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesUseCase.swift; sourceTree = "<group>"; };
+		2D460B132B3B1E1D004E3B35 /* ImagesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGateway.swift; sourceTree = "<group>"; };
+		2D460B162B3B1E93004E3B35 /* Resolver + Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resolver + Injection.swift"; sourceTree = "<group>"; };
+		2D460B192B3B1EEF004E3B35 /* ApiImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiImages.swift; sourceTree = "<group>"; };
+		2D460B1C2B3B1F49004E3B35 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		2DF11C7A2B3AAE4A009D5EE4 /* PixaBayImageExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixaBayImageExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF11C7D2B3AAE4A009D5EE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DF11C7F2B3AAE4A009D5EE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D460B122B3B1E05004E3B35 /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +87,11 @@
 		2D460B022B3B0FC7004E3B35 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2D460B1B2B3B1F14004E3B35 /* Models */,
+				2D460B182B3B1ECD004E3B35 /* ApiModels */,
+				2D460B152B3B1E7A004E3B35 /* Extensions */,
+				2D460B0D2B3B1DBC004E3B35 /* UseCases */,
+				2D460B0C2B3B1DAB004E3B35 /* Gateways */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -86,11 +103,50 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		2D460B0C2B3B1DAB004E3B35 /* Gateways */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B132B3B1E1D004E3B35 /* ImagesGateway.swift */,
+			);
+			path = Gateways;
+			sourceTree = "<group>";
+		};
+		2D460B0D2B3B1DBC004E3B35 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B0E2B3B1DE6004E3B35 /* ImagesUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		2D460B152B3B1E7A004E3B35 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B162B3B1E93004E3B35 /* Resolver + Injection.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2D460B182B3B1ECD004E3B35 /* ApiModels */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B192B3B1EEF004E3B35 /* ApiImages.swift */,
+			);
+			path = ApiModels;
+			sourceTree = "<group>";
+		};
+		2D460B1B2B3B1F14004E3B35 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B1C2B3B1F49004E3B35 /* ImageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		2DF11C712B3AAE4A009D5EE4 = {
 			isa = PBXGroup;
 			children = (
 				2DF11C7C2B3AAE4A009D5EE4 /* PixaBayImageExplorer */,
-				2DF11C8B2B3AAE4B009D5EE4 /* Info.plist */,
 				2DF11C7B2B3AAE4A009D5EE4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +162,7 @@
 		2DF11C7C2B3AAE4A009D5EE4 /* PixaBayImageExplorer */ = {
 			isa = PBXGroup;
 			children = (
+				2DF11C8B2B3AAE4B009D5EE4 /* Info.plist */,
 				2D460AFF2B3B0F47004E3B35 /* App */,
 				2D460B002B3B0F60004E3B35 /* Resources */,
 				2D460B012B3B0F85004E3B35 /* NetworkLayer */,
@@ -132,6 +189,9 @@
 			dependencies = (
 			);
 			name = PixaBayImageExplorer;
+			packageProductDependencies = (
+				2D460B112B3B1E05004E3B35 /* Resolver */,
+			);
 			productName = PixaBayImageExplorer;
 			productReference = 2DF11C7A2B3AAE4A009D5EE4 /* PixaBayImageExplorer.app */;
 			productType = "com.apple.product-type.application";
@@ -160,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 2DF11C712B3AAE4A009D5EE4;
+			packageReferences = (
+				2D460B102B3B1E05004E3B35 /* XCRemoteSwiftPackageReference "Resolver" */,
+			);
 			productRefGroup = 2DF11C7B2B3AAE4A009D5EE4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -186,11 +249,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D460B142B3B1E1D004E3B35 /* ImagesGateway.swift in Sources */,
 				2DF11C822B3AAE4A009D5EE4 /* ViewController.swift in Sources */,
 				2DF11C7E2B3AAE4A009D5EE4 /* AppDelegate.swift in Sources */,
+				2D460B172B3B1E93004E3B35 /* Resolver + Injection.swift in Sources */,
+				2D460B1A2B3B1EEF004E3B35 /* ApiImages.swift in Sources */,
 				2D460B052B3B10EB004E3B35 /* Endpoint.swift in Sources */,
 				2D460B072B3B1106004E3B35 /* DataTransport.swift in Sources */,
+				2D460B1D2B3B1F49004E3B35 /* ImageModel.swift in Sources */,
 				2DF11C802B3AAE4A009D5EE4 /* SceneDelegate.swift in Sources */,
+				2D460B0F2B3B1DE6004E3B35 /* ImagesUseCase.swift in Sources */,
 				2D460B0B2B3B1156004E3B35 /* ServiceError.swift in Sources */,
 				2D460B092B3B1127004E3B35 /* DataTransportService.swift in Sources */,
 			);
@@ -400,6 +468,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2D460B102B3B1E05004E3B35 /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2D460B112B3B1E05004E3B35 /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D460B102B3B1E05004E3B35 /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2DF11C722B3AAE4A009D5EE4 /* Project object */;
 }
