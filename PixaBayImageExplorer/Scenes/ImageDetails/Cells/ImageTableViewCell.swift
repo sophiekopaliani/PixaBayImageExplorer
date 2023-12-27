@@ -80,9 +80,6 @@ class ImageTableViewCell: UITableViewCell {
         imageTypeLabel.right(toView: contentView)
         imageTypeLabel.bottom(toView: contentView)
     }
-
-
-
     func configure(with item: Image?) {
         guard let item else { return }
         imageSizeLabel.text = "Size: \(item.imageSize)"

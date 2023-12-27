@@ -33,6 +33,20 @@
 		2D460B442B3B4F35004E3B35 /* ImageCollectionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B432B3B4F35004E3B35 /* ImageCollectionRouter.swift */; };
 		2D460B472B3B5053004E3B35 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B462B3B5053004E3B35 /* ImageCell.swift */; };
 		2D460B492B3B505D004E3B35 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B482B3B505D004E3B35 /* Footer.swift */; };
+		2D460B4B2B3B5EDA004E3B35 /* UserEmailValidatorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B4A2B3B5EDA004E3B35 /* UserEmailValidatorUseCase.swift */; };
+		2D460B4D2B3B5EFC004E3B35 /* PasswordLengthValidatorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B4C2B3B5EFC004E3B35 /* PasswordLengthValidatorUseCase.swift */; };
+		2D460B4F2B3B5F14004E3B35 /* UserAgeValidatorUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B4E2B3B5F14004E3B35 /* UserAgeValidatorUseCase.swift */; };
+		2D460B512B3BFF28004E3B35 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B502B3BFF28004E3B35 /* AuthenticationViewModel.swift */; };
+		2D460B532B3BFF5F004E3B35 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B522B3BFF5F004E3B35 /* Credentials.swift */; };
+		2D460B552B3BFF82004E3B35 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B542B3BFF82004E3B35 /* ValidationError.swift */; };
+		2D460B582B3C0012004E3B35 /* TextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B572B3C0012004E3B35 /* TextFieldModel.swift */; };
+		2D460B5A2B3C0056004E3B35 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B592B3C0056004E3B35 /* TextFieldView.swift */; };
+		2D460B5C2B3C00C8004E3B35 /* AuthorisationManagerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B5B2B3C00C8004E3B35 /* AuthorisationManagerUseCase.swift */; };
+		2D460B5E2B3C00F8004E3B35 /* ApiUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B5D2B3C00F8004E3B35 /* ApiUserInfo.swift */; };
+		2D460B602B3C0117004E3B35 /* UserLoginGatevay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B5F2B3C0117004E3B35 /* UserLoginGatevay.swift */; };
+		2D460B622B3C0134004E3B35 /* UserRegistrationGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B612B3C0134004E3B35 /* UserRegistrationGateway.swift */; };
+		2D460B642B3C01FE004E3B35 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B632B3C01FE004E3B35 /* AuthenticationController.swift */; };
+		2D460B662B3C023B004E3B35 /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B652B3C023B004E3B35 /* AuthenticationRouter.swift */; };
 		2DF11C7E2B3AAE4A009D5EE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7D2B3AAE4A009D5EE4 /* AppDelegate.swift */; };
 		2DF11C802B3AAE4A009D5EE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7F2B3AAE4A009D5EE4 /* SceneDelegate.swift */; };
 		2DF11C822B3AAE4A009D5EE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C812B3AAE4A009D5EE4 /* ViewController.swift */; };
@@ -65,6 +79,20 @@
 		2D460B432B3B4F35004E3B35 /* ImageCollectionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionRouter.swift; sourceTree = "<group>"; };
 		2D460B462B3B5053004E3B35 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		2D460B482B3B505D004E3B35 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
+		2D460B4A2B3B5EDA004E3B35 /* UserEmailValidatorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEmailValidatorUseCase.swift; sourceTree = "<group>"; };
+		2D460B4C2B3B5EFC004E3B35 /* PasswordLengthValidatorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordLengthValidatorUseCase.swift; sourceTree = "<group>"; };
+		2D460B4E2B3B5F14004E3B35 /* UserAgeValidatorUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgeValidatorUseCase.swift; sourceTree = "<group>"; };
+		2D460B502B3BFF28004E3B35 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		2D460B522B3BFF5F004E3B35 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		2D460B542B3BFF82004E3B35 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		2D460B572B3C0012004E3B35 /* TextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModel.swift; sourceTree = "<group>"; };
+		2D460B592B3C0056004E3B35 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		2D460B5B2B3C00C8004E3B35 /* AuthorisationManagerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationManagerUseCase.swift; sourceTree = "<group>"; };
+		2D460B5D2B3C00F8004E3B35 /* ApiUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUserInfo.swift; sourceTree = "<group>"; };
+		2D460B5F2B3C0117004E3B35 /* UserLoginGatevay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginGatevay.swift; sourceTree = "<group>"; };
+		2D460B612B3C0134004E3B35 /* UserRegistrationGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationGateway.swift; sourceTree = "<group>"; };
+		2D460B632B3C01FE004E3B35 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
+		2D460B652B3C023B004E3B35 /* AuthenticationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
 		2DF11C7A2B3AAE4A009D5EE4 /* PixaBayImageExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixaBayImageExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF11C7D2B3AAE4A009D5EE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DF11C7F2B3AAE4A009D5EE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +152,7 @@
 				2D460B152B3B1E7A004E3B35 /* Extensions */,
 				2D460B0D2B3B1DBC004E3B35 /* UseCases */,
 				2D460B0C2B3B1DAB004E3B35 /* Gateways */,
+				2D460B542B3BFF82004E3B35 /* ValidationError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -143,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				2D460B132B3B1E1D004E3B35 /* ImagesGateway.swift */,
+				2D460B5F2B3C0117004E3B35 /* UserLoginGatevay.swift */,
+				2D460B612B3C0134004E3B35 /* UserRegistrationGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -151,6 +182,10 @@
 			isa = PBXGroup;
 			children = (
 				2D460B0E2B3B1DE6004E3B35 /* ImagesUseCase.swift */,
+				2D460B4A2B3B5EDA004E3B35 /* UserEmailValidatorUseCase.swift */,
+				2D460B4C2B3B5EFC004E3B35 /* PasswordLengthValidatorUseCase.swift */,
+				2D460B4E2B3B5F14004E3B35 /* UserAgeValidatorUseCase.swift */,
+				2D460B5B2B3C00C8004E3B35 /* AuthorisationManagerUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -170,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				2D460B192B3B1EEF004E3B35 /* ApiImages.swift */,
+				2D460B5D2B3C00F8004E3B35 /* ApiUserInfo.swift */,
 			);
 			path = ApiModels;
 			sourceTree = "<group>";
@@ -178,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				2D460B1C2B3B1F49004E3B35 /* ImageModel.swift */,
+				2D460B522B3BFF5F004E3B35 /* Credentials.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,6 +251,9 @@
 		2D460B262B3B31B3004E3B35 /* Authorisation */ = {
 			isa = PBXGroup;
 			children = (
+				2D460B502B3BFF28004E3B35 /* AuthenticationViewModel.swift */,
+				2D460B632B3C01FE004E3B35 /* AuthenticationController.swift */,
+				2D460B652B3C023B004E3B35 /* AuthenticationRouter.swift */,
 			);
 			path = Authorisation;
 			sourceTree = "<group>";
@@ -236,6 +276,15 @@
 				2D460B482B3B505D004E3B35 /* Footer.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		2D460B562B3BFFE0004E3B35 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2D460B572B3C0012004E3B35 /* TextFieldModel.swift */,
+				2D460B592B3C0056004E3B35 /* TextFieldView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		2DF11C712B3AAE4A009D5EE4 = {
@@ -263,6 +312,7 @@
 				2D460B012B3B0F85004E3B35 /* NetworkLayer */,
 				2D460B022B3B0FC7004E3B35 /* Core */,
 				2D460B032B3B0FDD004E3B35 /* Scenes */,
+				2D460B562B3BFFE0004E3B35 /* Components */,
 				2DF11C812B3AAE4A009D5EE4 /* ViewController.swift */,
 			);
 			path = PixaBayImageExplorer;
@@ -347,29 +397,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D460B492B3B505D004E3B35 /* Footer.swift in Sources */,
+				2D460B5A2B3C0056004E3B35 /* TextFieldView.swift in Sources */,
+				2D460B582B3C0012004E3B35 /* TextFieldModel.swift in Sources */,
 				2D460B402B3B4EA1004E3B35 /* ImageCollectionViewModel.swift in Sources */,
 				2D460B392B3B34D2004E3B35 /* ImageTableViewCell.swift in Sources */,
 				2D460B302B3B3352004E3B35 /* CGFloat + Constants.swift in Sources */,
 				2D460B372B3B345B004E3B35 /* Badge.swift in Sources */,
+				2D460B512B3BFF28004E3B35 /* AuthenticationViewModel.swift in Sources */,
 				2D460B142B3B1E1D004E3B35 /* ImagesGateway.swift in Sources */,
 				2D460B422B3B4F00004E3B35 /* ImageCollectionController.swift in Sources */,
 				2DF11C822B3AAE4A009D5EE4 /* ViewController.swift in Sources */,
 				2D460B2A2B3B325A004E3B35 /* ImageDetailsController.swift in Sources */,
+				2D460B602B3C0117004E3B35 /* UserLoginGatevay.swift in Sources */,
+				2D460B642B3C01FE004E3B35 /* AuthenticationController.swift in Sources */,
 				2D460B3B2B3B34EA004E3B35 /* DetailCell.swift in Sources */,
 				2DF11C7E2B3AAE4A009D5EE4 /* AppDelegate.swift in Sources */,
 				2D460B2E2B3B3313004E3B35 /* ImageDetailCotroller + DataSource.swift in Sources */,
+				2D460B4D2B3B5EFC004E3B35 /* PasswordLengthValidatorUseCase.swift in Sources */,
+				2D460B622B3C0134004E3B35 /* UserRegistrationGateway.swift in Sources */,
 				2D460B172B3B1E93004E3B35 /* Resolver + Injection.swift in Sources */,
+				2D460B662B3C023B004E3B35 /* AuthenticationRouter.swift in Sources */,
 				2D460B1A2B3B1EEF004E3B35 /* ApiImages.swift in Sources */,
+				2D460B5E2B3C00F8004E3B35 /* ApiUserInfo.swift in Sources */,
 				2D460B052B3B10EB004E3B35 /* Endpoint.swift in Sources */,
 				2D460B332B3B33E4004E3B35 /* UIStackView+Subviews.swift in Sources */,
+				2D460B4F2B3B5F14004E3B35 /* UserAgeValidatorUseCase.swift in Sources */,
 				2D460B072B3B1106004E3B35 /* DataTransport.swift in Sources */,
+				2D460B5C2B3C00C8004E3B35 /* AuthorisationManagerUseCase.swift in Sources */,
 				2D460B1D2B3B1F49004E3B35 /* ImageModel.swift in Sources */,
 				2D460B442B3B4F35004E3B35 /* ImageCollectionRouter.swift in Sources */,
 				2D460B2C2B3B32AB004E3B35 /* UIView + Constraints.swift in Sources */,
+				2D460B4B2B3B5EDA004E3B35 /* UserEmailValidatorUseCase.swift in Sources */,
 				2DF11C802B3AAE4A009D5EE4 /* SceneDelegate.swift in Sources */,
 				2D460B0F2B3B1DE6004E3B35 /* ImagesUseCase.swift in Sources */,
+				2D460B532B3BFF5F004E3B35 /* Credentials.swift in Sources */,
 				2D460B282B3B31E3004E3B35 /* ImageDetailsViewModel.swift in Sources */,
 				2D460B352B3B3421004E3B35 /* TagsCell.swift in Sources */,
+				2D460B552B3BFF82004E3B35 /* ValidationError.swift in Sources */,
 				2D460B0B2B3B1156004E3B35 /* ServiceError.swift in Sources */,
 				2D460B092B3B1127004E3B35 /* DataTransportService.swift in Sources */,
 				2D460B472B3B5053004E3B35 /* ImageCell.swift in Sources */,

@@ -13,6 +13,10 @@ extension Resolver: ResolverRegistering {
         register(ImagesUseCase.self) { ImagesUseCaseImpl() }
         register(ImagesGateway.self) { ImagesGatewayImpl() }
         register(DataTransportService.self) { DataTransport() }
+        register(AuthorisationManagerUseCase.self) { AuthorisationManagerUseCaseImpl() }
+        register(PasswordLengthValidatorUseCase.self) { PasswordLengthValidatorImpl() }
+        register(UserEmailValidatorUseCase.self) { UserEmailValidatorImpl() }
+        register(UserAgeValidatorUseCase.self) { UserAgeValidatorImpl() }
     }
 }
 

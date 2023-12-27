@@ -12,7 +12,7 @@ protocol ImageCollectionRouter {
 }
 
 extension ImageCollectionViewController: ImageCollectionRouter {
-    func navigateTo(item: Image) { //TODO: move out
+    func navigateTo(item: Image) {
         let vm = ImageDetailsViewModelImpl(imageDetails: item)
         let vc = ImageDetailsController(vm: vm)
         navigationController?.pushViewController(vc, animated: true)
