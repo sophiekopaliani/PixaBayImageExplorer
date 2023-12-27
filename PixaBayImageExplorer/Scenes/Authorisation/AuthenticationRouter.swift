@@ -20,8 +20,7 @@ extension AuthenticationController: AuthernticationRouter {
     }
     
     func navigateToRegistrationPage() {
-        //TODO: 
-//        let vc = RegistrationController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = RegistrationController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

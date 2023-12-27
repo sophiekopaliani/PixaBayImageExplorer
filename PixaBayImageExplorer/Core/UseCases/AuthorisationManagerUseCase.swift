@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resolver
 
 protocol AuthorisationManagerUseCase {
     func loginUser(email: String,
@@ -13,14 +14,14 @@ protocol AuthorisationManagerUseCase {
     
     func registerUser(email: String,
                       password: String,
-                      age: Int?)  async throws -> Bool //TODO: 
+                      age: Int?)  async throws
 }
 
 
 class AuthorisationManagerUseCaseImpl: AuthorisationManagerUseCase {
     func loginUser(email: String,
                    password: String)  async throws {
-        let userLoginGateway = MockUserLoginGatewayImpl()
+        @Injected var userLoginGateway: UserLoginGateway
         do {
             let apiResponse = try await userLoginGateway.checkUserLoginInfo(for: email, and: password)
             guard email == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
@@ -30,16 +31,17 @@ class AuthorisationManagerUseCaseImpl: AuthorisationManagerUseCase {
         }
     }
     
-    @discardableResult
     func registerUser(email: String,
                       password: String,
-                      age: Int?) async throws -> Bool {
-        let userRegistrationGateway = MockUserRegistrationGatewayImpl()
+                      age: Int?) async throws {
+        @Injected var userRegistrationGateway: UserRegistrationGateway
+      
         do {
             let apiResponse = try await userRegistrationGateway.registerUser(with: email,
                                                                              password: password,
                                                                              age: age)
-            return email == apiResponse.email
+            guard email == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
+            guard password == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
         } catch {
             throw error
         }

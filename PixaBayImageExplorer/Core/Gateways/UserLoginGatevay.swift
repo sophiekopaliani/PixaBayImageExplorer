@@ -17,7 +17,7 @@ class MockUserLoginGatewayImpl: UserLoginGateway {
         guard email?.lowercased() != "sophie.kopaliani@gmail.com" else {
             return .init(email: "sophie.kopaliani@gmail.com", age: 70) }
         guard email?.lowercased() != "testuser@gmail.com" else {
-            return .init(email: "tesuser@gmail.com", age: 18)}
-        throw ValidatorError.cannotLogin
+            return .init(email: "testuser@gmail.com", age: 18)}
+        return .init(email: "testuser@gmail.com", age: 18)
     }
 }

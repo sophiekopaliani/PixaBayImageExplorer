@@ -17,6 +17,9 @@ extension Resolver: ResolverRegistering {
         register(PasswordLengthValidatorUseCase.self) { PasswordLengthValidatorImpl() }
         register(UserEmailValidatorUseCase.self) { UserEmailValidatorImpl() }
         register(UserAgeValidatorUseCase.self) { UserAgeValidatorImpl() }
+        register(UserRegistrationGateway.self) { MockUserRegistrationGatewayImpl() }
+        register(UserLoginGateway.self) { MockUserLoginGatewayImpl() }
+        register(RegistrationViewModel.self) { RegistrationViewModelImpl() }
     }
 }
 
