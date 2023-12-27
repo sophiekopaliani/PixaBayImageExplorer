@@ -29,9 +29,7 @@ class RegistrationController: UIViewController {
     private lazy var emailTextField: TextFieldView = {
         var tf = TextFieldView(model: vm.emailTextFieldModel) { [weak self] mail in
             guard let self = self else { return }
-            self.vm.set(username: mail)
-            emailTextField.model = self.vm.emailTextFieldModel
-            self.configureButton(isEnabled: vm.isButtonDissabled())
+            self.vm.set(email: mail)
         }
         return tf
     }()
@@ -40,8 +38,6 @@ class RegistrationController: UIViewController {
         var tf = TextFieldView(model: vm.passTextFieldModel) { [weak self] password in
             guard let self = self else { return }
             self.vm.set(password: password)
-            passwordTextField.model = self.vm.passTextFieldModel
-            self.configureButton(isEnabled: vm.isButtonDissabled())
         }
         return tf
     }()
@@ -72,7 +68,7 @@ class RegistrationController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        vm.set(delegate: self)
         self.view.backgroundColor = .systemBackground
         agePicker.delegate = self
         agePicker.dataSource = self
@@ -97,7 +93,7 @@ class RegistrationController: UIViewController {
 
     private func setUpUI() {
         navigationItem.title = "Registration"
-        self.configureButton(isEnabled: vm.isButtonDissabled())
+        self.configureButton(isEnabled: vm.isButtonDissabled)
     }
 
     private func addConstraints() {
@@ -107,10 +103,6 @@ class RegistrationController: UIViewController {
         containerStack.right(toView: self.view)
     }
 
-    private func configure(with model: AuthenticationViewModel) {
-
-    }
-
     private func didTapRegisterButton(_ action: UIAction) {
         Task.detached { @MainActor [weak self] in
             guard let self else { return }
@@ -118,8 +110,7 @@ class RegistrationController: UIViewController {
                 try await self.vm.registerUser()
                 self.navigateToMainPage()
             } catch ValidatorError.wrongParameters {
-                emailTextField.model =  self.vm.emailTextFieldModel
-                passwordTextField.model = self.vm.passTextFieldModel
+                 
             } catch {
                 self.showErrorMessage(error: error)
             }
@@ -136,6 +127,14 @@ class RegistrationController: UIViewController {
         )
         banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
                     cornerRadius: .S)
+    }
+}
+
+extension RegistrationController: RegistrationControllerDelegate {
+    func reload() {
+        emailTextField.model =  self.vm.emailTextFieldModel
+        passwordTextField.model = self.vm.passTextFieldModel
+        configureButton(isEnabled: vm.isButtonDissabled)
     }
 }
 
@@ -157,6 +156,5 @@ extension RegistrationController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         vm.set(age: vm.userAccaptableAgeRange.lowerBound + row)
-        configureButton(isEnabled: vm.isButtonDissabled())
     }
 }

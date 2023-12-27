@@ -8,15 +8,20 @@
 import Foundation
 import Resolver
 
-protocol RegistrationViewModel { 
+protocol RegistrationControllerDelegate: AnyObject {
+    func reload()
+}
+
+protocol RegistrationViewModel {
+    func set(delegate: RegistrationControllerDelegate)
     var emailTextFieldModel: TextFieldModel{ get }
     var passTextFieldModel: TextFieldModel { get }
     var userAccaptableAgeRange: Range<Int> { get }
-    func set(username: String)
+    var isButtonDissabled: Bool { get }
+    func set(email: String)
     func set(password: String)
     func set(age: Int)
     func registerUser() async throws
-    func isButtonDissabled() -> Bool
 }
 
 class RegistrationViewModelImpl: RegistrationViewModel {
@@ -26,10 +31,19 @@ class RegistrationViewModelImpl: RegistrationViewModel {
     @Injected var passwordValidator: PasswordLengthValidatorUseCase
     @Injected var userAgeValidator: UserAgeValidatorUseCase
     
-    private var emailValidationErrorMessage: String? = nil
-    private var passWordValidationErrorMessage: String? = nil
-    private var ageValidationErrorMessage: String? = nil
+    private var emailValidationErrorMessage: String? = nil {
+        didSet  { delegate?.reload() }
+    }
+    private var passWordValidationErrorMessage: String? = nil {
+        didSet  { delegate?.reload() }
+    }
+    private var ageValidationErrorMessage: String? = nil {
+        didSet  { delegate?.reload() }
+    }
     
+    private weak var delegate: RegistrationControllerDelegate?
+    
+    private var credentials = RegistrationCredentials()
     
     var userAccaptableAgeRange: Range<Int> {
         userAgeValidator.validAgeRange
@@ -39,24 +53,27 @@ class RegistrationViewModelImpl: RegistrationViewModel {
                                                          isSecureEntry: false,
                                                          keyboardType: .emailAddress,
                                                          inputText: nil,
-                                                         isInputValid: true, //TODO: remove
                                                          validationMessage: emailValidationErrorMessage)}
     
     var passTextFieldModel: TextFieldModel  {.init(placeholder: "Password",
                                                         isSecureEntry: false,
                                                         keyboardType: .default,
                                                         inputText: nil,
-                                                        isInputValid: true, //TODO: remove
-                                                        validationMessage: passWordValidationErrorMessage) }
+                                                        validationMessage: passWordValidationErrorMessage)}
     
-    private var credentials = RegistrationCredentials()
-
-    var isAgeInputValid: Bool {
-        return userAgeValidator.isValid(age: credentials.age)
+    var isButtonDissabled: Bool {
+        guard passWordValidationErrorMessage == nil && credentials.password != "",
+              emailValidationErrorMessage == nil && credentials.email != "",
+              ageValidationErrorMessage == nil && credentials.age != nil else { return false }
+        return true
     }
     
-    func set(username: String) {
-        credentials.email = username
+    func set(delegate: RegistrationControllerDelegate) {
+        self.delegate = delegate
+    }
+    
+    func set(email: String) {
+        credentials.email = email
         try? vallidateEmailInput()
     }
     
@@ -67,6 +84,7 @@ class RegistrationViewModelImpl: RegistrationViewModel {
     
     func set(age: Int) {
         credentials.age = age
+        try? validateAgeInput()
     }
     
     func vallidateEmailInput() throws  {
@@ -75,7 +93,7 @@ class RegistrationViewModelImpl: RegistrationViewModel {
             emailValidationErrorMessage = nil
         } catch ValidatorError.invalidEmail {
             emailValidationErrorMessage = ValidatorError.invalidEmail.customDescription
-            throw ValidatorError.invalidEmail
+            throw ValidatorError.wrongParameters
         }
     }
     
@@ -85,15 +103,18 @@ class RegistrationViewModelImpl: RegistrationViewModel {
             passWordValidationErrorMessage = nil
         } catch ValidatorError.invalidPassword {
             passWordValidationErrorMessage = ValidatorError.invalidPassword.customDescription
-            throw ValidatorError.invalidPassword
+            throw ValidatorError.wrongParameters
         }
     }
     
-    func isButtonDissabled() -> Bool {
-        guard passWordValidationErrorMessage == nil && credentials.password != "",
-              emailValidationErrorMessage == nil && credentials.email != "",
-              ageValidationErrorMessage == nil && credentials.age != nil else { return false }
-        return true
+    func validateAgeInput() throws {
+        do {
+            try userAgeValidator.validate(age: credentials.age)
+            ageValidationErrorMessage = nil
+        } catch ValidatorError.invalidAge {
+            ageValidationErrorMessage = ValidatorError.invalidAge.customDescription
+            throw ValidatorError.wrongParameters
+        }
     }
     
     func registerUser() async throws {

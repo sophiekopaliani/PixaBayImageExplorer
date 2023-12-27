@@ -41,7 +41,6 @@ class AuthorisationManagerUseCaseImpl: AuthorisationManagerUseCase {
                                                                              password: password,
                                                                              age: age)
             guard email.lowercased() == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
-            guard password.lowercased() == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
         } catch {
             throw error
         }

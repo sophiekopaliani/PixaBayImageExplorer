@@ -8,7 +8,7 @@
 import Foundation
 import Resolver
 
-protocol AuthControllerDelegate {
+protocol AuthControllerDelegate: AnyObject {
     func reload()
 }
 
@@ -28,7 +28,7 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
     @Injected var emailValidator: UserEmailValidatorUseCase
     @Injected var passwordValidator: PasswordLengthValidatorUseCase
     
-    private var delegate: AuthControllerDelegate?
+    private weak var delegate: AuthControllerDelegate?
     
     private var credentials = Credentials()
 
@@ -42,16 +42,12 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
     var emailTextFieldModel: TextFieldModel { .init(placeholder: "Email",
                                                     isSecureEntry: false,
                                                     keyboardType: .emailAddress,
-                                                    inputText: nil,
-                                                    isInputValid: true,
                                                     validationMessage: emailValidationErrorMessage)
     }
     
-    var passTextFieldModel:TextFieldModel { .init(placeholder: "Password",
+    var passTextFieldModel: TextFieldModel { .init(placeholder: "Password",
                                                   isSecureEntry: true,
                                                   keyboardType: .default,
-                                                  inputText: nil,
-                                                  isInputValid: true,
                                                   validationMessage: passWordValidationErrorMessage)}
     
     var isButtonDissabled: Bool {

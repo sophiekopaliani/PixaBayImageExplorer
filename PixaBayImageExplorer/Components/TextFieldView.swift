@@ -182,10 +182,6 @@ extension TextFieldView {
         if let placeholder = model.placeholder {
             textField.placeholder = placeholder
         }
-        
-        if let text = model.inputText, !text.isEmpty {
-            textField.text = text
-        }
     }
 }
 
