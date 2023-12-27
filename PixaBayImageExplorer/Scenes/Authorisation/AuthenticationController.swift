@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import NotificationBannerSwift
+import NotificationBannerSwift
 
 class AuthenticationController: UIViewController {
     
@@ -144,11 +144,11 @@ class AuthenticationController: UIViewController {
     }
     
     private func showErrorMessage(error: Error) {
-        //        let banner = FloatingNotificationBanner(title: error.localizedDescription,
-        //                                                 style: .danger
-        //        )
-        //        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
-        //                     cornerRadius: .S)
+        let banner = FloatingNotificationBanner(title: error.localizedDescription,
+                                                style: .danger
+        )
+        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
+                    cornerRadius: .S)
     }
 }
 

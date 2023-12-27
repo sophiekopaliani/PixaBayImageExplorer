@@ -51,6 +51,7 @@
 		2D460B6A2B3C15C6004E3B35 /* RegistrationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B692B3C15C6004E3B35 /* RegistrationCredentials.swift */; };
 		2D460B6C2B3C15F4004E3B35 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B6B2B3C15F4004E3B35 /* RegistrationController.swift */; };
 		2D460B6E2B3C160C004E3B35 /* RegistrationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D460B6D2B3C160C004E3B35 /* RegistrationRouter.swift */; };
+		2D460B712B3C3E9F004E3B35 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2D460B702B3C3E9F004E3B35 /* NotificationBannerSwift */; };
 		2DF11C7E2B3AAE4A009D5EE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7D2B3AAE4A009D5EE4 /* AppDelegate.swift */; };
 		2DF11C802B3AAE4A009D5EE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF11C7F2B3AAE4A009D5EE4 /* SceneDelegate.swift */; };
 		2DF11C872B3AAE4B009D5EE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DF11C862B3AAE4B009D5EE4 /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D460B3E2B3B361E004E3B35 /* SDWebImage in Frameworks */,
+				2D460B712B3C3E9F004E3B35 /* NotificationBannerSwift in Frameworks */,
 				2D460B122B3B1E05004E3B35 /* Resolver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,6 +348,7 @@
 			packageProductDependencies = (
 				2D460B112B3B1E05004E3B35 /* Resolver */,
 				2D460B3D2B3B361E004E3B35 /* SDWebImage */,
+				2D460B702B3C3E9F004E3B35 /* NotificationBannerSwift */,
 			);
 			productName = PixaBayImageExplorer;
 			productReference = 2DF11C7A2B3AAE4A009D5EE4 /* PixaBayImageExplorer.app */;
@@ -378,6 +381,7 @@
 			packageReferences = (
 				2D460B102B3B1E05004E3B35 /* XCRemoteSwiftPackageReference "Resolver" */,
 				2D460B3C2B3B361E004E3B35 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2D460B6F2B3C3E9F004E3B35 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 2DF11C7B2B3AAE4A009D5EE4 /* Products */;
 			projectDirPath = "";
@@ -674,6 +678,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		2D460B6F2B3C3E9F004E3B35 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -686,6 +698,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2D460B3C2B3B361E004E3B35 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		2D460B702B3C3E9F004E3B35 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D460B6F2B3C3E9F004E3B35 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

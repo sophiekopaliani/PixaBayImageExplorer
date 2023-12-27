@@ -7,6 +7,7 @@
 
 import UIKit
 import Resolver
+import NotificationBannerSwift
 
 class RegistrationController: UIViewController {
     
@@ -120,7 +121,7 @@ class RegistrationController: UIViewController {
                 emailTextField.model =  self.vm.emailTextFieldModel
                 passwordTextField.model = self.vm.passTextFieldModel
             } catch {
-                self.showErrorMessage()
+                self.showErrorMessage(error: error)
             }
         }
     }
@@ -129,8 +130,12 @@ class RegistrationController: UIViewController {
         registerButton.isEnabled = isEnabled
     }
     
-    private func showErrorMessage() {
-        print("show Error Message")
+    private func showErrorMessage(error: Error) {
+        let banner = FloatingNotificationBanner(title: error.localizedDescription,
+                                                style: .danger
+        )
+        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
+                    cornerRadius: .S)
     }
 }
 
