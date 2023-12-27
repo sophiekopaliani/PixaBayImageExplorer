@@ -12,14 +12,7 @@ class AuthenticationController: UIViewController {
     
     var vm: AuthenticationViewModel
     
-    init(vm: AuthenticationViewModel) {
-        self.vm = vm
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var bottomConstraint: NSLayoutConstraint?
     
     private lazy var containerStack: UIStackView = {
         let stackView = UIStackView()
@@ -41,18 +34,14 @@ class AuthenticationController: UIViewController {
         var tf = TextFieldView(model: vm.emailTextFieldModel) { [weak self] mail in
             guard let self = self else { return }
             self.vm.set(username: mail)
-            emailTextField.model = self.vm.emailTextFieldModel
-            self.configureButton(isEnabled: vm.isButtonDissabled())
         }
         return tf
     }()
-    
+
     private lazy var passwordTextField: TextFieldView = {
         var tf = TextFieldView(model: vm.passTextFieldModel) { [weak self] password in
             guard let self = self else { return }
             self.vm.set(password: password)
-            passwordTextField.model = self.vm.passTextFieldModel
-            self.configureButton(isEnabled: vm.isButtonDissabled())
         }
         return tf
     }()
@@ -76,6 +65,21 @@ class AuthenticationController: UIViewController {
         return b
     }()
     
+    init(vm: AuthenticationViewModel) {
+        self.vm = vm
+        super.init(nibName: nil, bundle: nil)
+        vm.set(delegate: self)
+        addKeyboardNotifications()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        removeKeyboardObservers()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,7 +91,7 @@ class AuthenticationController: UIViewController {
         addSubviews()
         setUpUI()
         addConstraints()
-        configureButton(isEnabled: vm.isButtonDissabled())
+        configureButton(isEnabled: vm.isButtonDissabled)
     }
     
     private func  addSubviews() {
@@ -105,12 +109,13 @@ class AuthenticationController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Log In"
+        navigationController?.navigationBar.tintColor = .blue;
     }
     
     private func addConstraints() {
-        containerStack.bottom(toView: self.view)
         containerStack.left(toView: self.view)
         containerStack.right(toView: self.view)
+        bottomConstraint = containerStack.bottom(toView: view)
     }
     
     private func didTapLoginButton(_ action: UIAction) {
@@ -123,8 +128,6 @@ class AuthenticationController: UIViewController {
                 self.navigateToMainPage()
             } catch ValidatorError.wrongParameters {
                 activityIndicator.stopAnimating()
-                emailTextField.model =  self.vm.emailTextFieldModel
-                passwordTextField.model = self.vm.passTextFieldModel
             } catch {
                 activityIndicator.stopAnimating()
                 self.showErrorMessage(error: error)
@@ -141,10 +144,45 @@ class AuthenticationController: UIViewController {
     }
     
     private func showErrorMessage(error: Error) {
-//        let banner = FloatingNotificationBanner(title: error.localizedDescription,
-//                                                 style: .danger
-//        )
-//        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
-//                     cornerRadius: .S)
+        //        let banner = FloatingNotificationBanner(title: error.localizedDescription,
+        //                                                 style: .danger
+        //        )
+        //        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
+        //                     cornerRadius: .S)
+    }
+}
+
+extension AuthenticationController: AuthControllerDelegate {
+    func reload() {
+        emailTextField.model =  self.vm.emailTextFieldModel
+        passwordTextField.model = self.vm.passTextFieldModel
+        configureButton(isEnabled: vm.isButtonDissabled)
+    }
+}
+
+//MARK: Keyboard functionality
+extension AuthenticationController {
+    
+    func addKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let userInfo = notification.userInfo as? Dictionary<String, AnyObject> {
+            let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey]
+            let keyboardRect = frame?.cgRectValue
+            if let keyboardHeight = keyboardRect?.height {
+                bottomConstraint?.constant = -keyboardHeight
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        bottomConstraint?.constant = -.M
     }
 }

@@ -8,13 +8,18 @@
 import Foundation
 import Resolver
 
+protocol AuthControllerDelegate {
+    func reload()
+}
+
 protocol AuthenticationViewModel {
+    func set(delegate: AuthControllerDelegate)
     var emailTextFieldModel: TextFieldModel{ get }
     var passTextFieldModel: TextFieldModel { get }
     func set(username: String)
     func set(password: String)
     func logIn() async throws
-    func isButtonDissabled() -> Bool
+    var isButtonDissabled: Bool { get }
 }
 
 class AuthenticationViewModelImpl: AuthenticationViewModel {
@@ -22,12 +27,17 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
     @Injected var authorisationService: AuthorisationManagerUseCase
     @Injected var emailValidator: UserEmailValidatorUseCase
     @Injected var passwordValidator: PasswordLengthValidatorUseCase
-
-    var isUserAbleToLogIn: Bool = false
-    private var emailValidationErrorMessage: String? = nil
-    private var passWordValidationErrorMessage: String? = nil
+    
+    private var delegate: AuthControllerDelegate?
     
     private var credentials = Credentials()
+
+    private var emailValidationErrorMessage: String? = nil {
+        didSet { delegate?.reload() }
+    }
+    private var passWordValidationErrorMessage: String? = nil {
+        didSet { delegate?.reload() }
+    }
     
     var emailTextFieldModel: TextFieldModel { .init(placeholder: "Email",
                                                     isSecureEntry: false,
@@ -43,6 +53,16 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
                                                   inputText: nil,
                                                   isInputValid: true,
                                                   validationMessage: passWordValidationErrorMessage)}
+    
+    var isButtonDissabled: Bool {
+        guard passWordValidationErrorMessage == nil && credentials.password != "",
+              emailValidationErrorMessage == nil && credentials.email != "" else { return false }
+        return true
+    }
+    
+    func set(delegate: AuthControllerDelegate) {
+        self.delegate = delegate
+    }
 
     func set(username: String) {
         credentials.email = username
@@ -72,12 +92,6 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
             passWordValidationErrorMessage = ValidatorError.invalidPassword.customDescription
             throw ValidatorError.invalidPassword
         }
-    }
-    
-    func isButtonDissabled() -> Bool {
-        guard passWordValidationErrorMessage == nil && credentials.password != "",
-              emailValidationErrorMessage == nil && credentials.email != "" else { return false }
-        return true
     }
     
     func logIn() async throws {

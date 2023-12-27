@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagsCell: UITableViewCell {
+class TagsCell: UITableViewCell, UIScrollViewDelegate {
     static let identifier = String(describing: TagsCell.self)
     
     private let badge: Badge = {
@@ -53,10 +53,15 @@ class TagsCell: UITableViewCell {
         contentContainerView.bottom(toView: contentView, constant: .M)
         contentContainerView.left(toView: contentView, constant: .M)
         contentContainerView.right(toView: contentView, constant: .M)
+        contentContainerView.delegate = self
         
         badgeContainerStack.top(toView: contentContainerView)
         badgeContainerStack.bottom(toView: contentContainerView)
         badgeContainerStack.left(toView: contentContainerView)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("sophieeeeee")
     }
 
     required init?(coder: NSCoder) {
@@ -66,6 +71,8 @@ class TagsCell: UITableViewCell {
     func configure(with tags: [String]) {
         badgeContainerStack.removeAllArrangedSubviews()
         for tag in tags {
+            badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
+            badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
             badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
         }
     }
