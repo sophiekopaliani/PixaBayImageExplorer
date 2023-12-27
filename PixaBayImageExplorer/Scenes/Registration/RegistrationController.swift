@@ -95,10 +95,7 @@ class RegistrationController: UIViewController {
     }
 
     private func setUpUI() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Registration"
-        
-        navigationController?.navigationBar.tintColor = .blue;
         self.configureButton(isEnabled: vm.isButtonDissabled())
     }
 
