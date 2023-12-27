@@ -112,17 +112,16 @@ class RegistrationController: UIViewController {
 
     private func didTapRegisterButton(_ action: UIAction) {
         activityIndicator.startAnimating()
-        Task.detached { @MainActor [weak self] in
-            guard let self else { return }
+        Task { [weak self] in
             do {
-                try await self.vm.registerUser()
-                activityIndicator.stopAnimating()
-                self.navigateToMainPage()
+                try await self?.vm.registerUser()
+                self?.activityIndicator.stopAnimating()
+                self?.navigateToMainPage()
             } catch ValidatorError.wrongParameters {
-                activityIndicator.startAnimating()
+                self?.activityIndicator.stopAnimating()
             } catch {
-                self.showErrorMessage(error: error)
-                activityIndicator.startAnimating()
+                self?.showErrorMessage(error: error)
+                self?.activityIndicator.stopAnimating()
             }
         }
     }
@@ -132,19 +131,18 @@ class RegistrationController: UIViewController {
     }
     
     private func showErrorMessage(error: Error) {
-        let banner = FloatingNotificationBanner(title: error.localizedDescription,
-                                                style: .danger
-        )
-        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
-                    cornerRadius: .S)
+            let banner = FloatingNotificationBanner(title: error.localizedDescription,
+                                                    style: .danger)
+            banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
+                        cornerRadius: .S)
     }
 }
 
 extension RegistrationController: RegistrationControllerDelegate {
     func reload() {
-        emailTextField.model =  self.vm.emailTextFieldModel
-        passwordTextField.model = self.vm.passTextFieldModel
-        configureButton(isEnabled: vm.isButtonDissabled)
+        self.emailTextField.model =  self.vm.emailTextFieldModel
+        self.passwordTextField.model = self.vm.passTextFieldModel
+        self.configureButton(isEnabled: self.vm.isButtonDissabled)
     }
 }
 

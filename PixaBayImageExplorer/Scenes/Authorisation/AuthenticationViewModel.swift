@@ -31,24 +31,24 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
     private weak var delegate: AuthControllerDelegate?
     
     private var credentials = Credentials()
-
+    
     private var emailValidationErrorMessage: String? = nil {
-        didSet { delegate?.reload() }
+        didSet { didUpdateModel() }
     }
+    
     private var passWordValidationErrorMessage: String? = nil {
-        didSet { delegate?.reload() }
+        didSet { didUpdateModel() }
     }
     
     var emailTextFieldModel: TextFieldModel { .init(placeholder: "Email",
                                                     isSecureEntry: false,
                                                     keyboardType: .emailAddress,
-                                                    validationMessage: emailValidationErrorMessage)
-    }
+                                                    validationMessage: emailValidationErrorMessage)}
     
     var passTextFieldModel: TextFieldModel { .init(placeholder: "Password",
-                                                  isSecureEntry: true,
-                                                  keyboardType: .default,
-                                                  validationMessage: passWordValidationErrorMessage)}
+                                                   isSecureEntry: true,
+                                                   keyboardType: .default,
+                                                   validationMessage: passWordValidationErrorMessage)}
     
     var isButtonDissabled: Bool {
         guard passWordValidationErrorMessage == nil && credentials.password != "",
@@ -56,6 +56,12 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
         return true
     }
     
+    private func didUpdateModel() {
+        Task { @MainActor [weak self] in
+            self?.delegate?.reload()
+        }
+    }
+
     func set(delegate: AuthControllerDelegate) {
         self.delegate = delegate
     }

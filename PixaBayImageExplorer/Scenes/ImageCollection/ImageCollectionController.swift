@@ -106,8 +106,7 @@ class ImageCollectionViewController: UICollectionViewController {
     private func showErrorMessage(message: String?) {
         guard let message = message else { return }
         let banner = FloatingNotificationBanner(title: message,
-                                                style: .danger
-        )
+                                                style: .danger)
         banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
                     cornerRadius: .S)
     }

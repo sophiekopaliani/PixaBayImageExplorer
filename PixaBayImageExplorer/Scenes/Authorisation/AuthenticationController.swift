@@ -145,8 +145,7 @@ class AuthenticationController: UIViewController {
     
     private func showErrorMessage(error: Error) {
         let banner = FloatingNotificationBanner(title: error.localizedDescription,
-                                                style: .danger
-        )
+                                                style: .danger)
         banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
                     cornerRadius: .S)
     }

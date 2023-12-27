@@ -32,13 +32,13 @@ class RegistrationViewModelImpl: RegistrationViewModel {
     @Injected var userAgeValidator: UserAgeValidatorUseCase
     
     private var emailValidationErrorMessage: String? = nil {
-        didSet  { delegate?.reload() }
+        didSet  { didUpdateModel() }
     }
     private var passWordValidationErrorMessage: String? = nil {
-        didSet  { delegate?.reload() }
+        didSet  { didUpdateModel() }
     }
     private var ageValidationErrorMessage: String? = nil {
-        didSet  { delegate?.reload() }
+        didSet  { didUpdateModel() }
     }
     
     private weak var delegate: RegistrationControllerDelegate?
@@ -66,6 +66,12 @@ class RegistrationViewModelImpl: RegistrationViewModel {
               emailValidationErrorMessage == nil && credentials.email != "",
               ageValidationErrorMessage == nil && credentials.age != nil else { return false }
         return true
+    }
+    
+    private func didUpdateModel() {
+        Task { @MainActor [weak self] in
+            self?.delegate?.reload()
+        }
     }
     
     func set(delegate: RegistrationControllerDelegate) {
