@@ -50,6 +50,12 @@ class RegistrationController: UIViewController {
         p.layer.borderColor = UIColor.systemGray2.cgColor
         return p
     }()
+    
+    private var activityIndicator: UIActivityIndicatorView = {
+        var v = UIActivityIndicatorView()
+        v.hidesWhenStopped = true
+        return  v
+    }()
 
     private lazy var spacer: UIView = {
         var v = UIView()
@@ -86,6 +92,7 @@ class RegistrationController: UIViewController {
         containerStack.addArrangedSubview(emailTextField)
         containerStack.addArrangedSubview(passwordTextField)
         containerStack.addArrangedSubview(agePicker)
+        containerStack.addArrangedSubview(activityIndicator)
         containerStack.addArrangedSubview(spacer)
         containerStack.addArrangedSubview(registerButton)
 
@@ -104,15 +111,18 @@ class RegistrationController: UIViewController {
     }
 
     private func didTapRegisterButton(_ action: UIAction) {
+        activityIndicator.startAnimating()
         Task.detached { @MainActor [weak self] in
             guard let self else { return }
             do {
                 try await self.vm.registerUser()
+                activityIndicator.stopAnimating()
                 self.navigateToMainPage()
             } catch ValidatorError.wrongParameters {
-                 
+                activityIndicator.startAnimating()
             } catch {
                 self.showErrorMessage(error: error)
+                activityIndicator.startAnimating()
             }
         }
     }
