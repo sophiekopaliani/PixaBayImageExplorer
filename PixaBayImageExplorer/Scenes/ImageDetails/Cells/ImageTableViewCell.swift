@@ -69,7 +69,7 @@ class ImageTableViewCell: UITableViewCell {
         productImageView.top(toView: contentView)
         productImageView.left(toView: contentView)
         productImageView.right(toView: contentView)
-        productImageView.height(equalTo: 400) // TODO:  height
+        productImageView.height(equalTo: 400)
 
         imageSizeLabel.relativeTop(toView: productImageView, constant: .S)
         imageSizeLabel.left(toView: contentView)
@@ -80,6 +80,7 @@ class ImageTableViewCell: UITableViewCell {
         imageTypeLabel.right(toView: contentView)
         imageTypeLabel.bottom(toView: contentView)
     }
+    
     func configure(with item: Image?) {
         guard let item else { return }
         imageSizeLabel.text = "Size: \(item.imageSize)"

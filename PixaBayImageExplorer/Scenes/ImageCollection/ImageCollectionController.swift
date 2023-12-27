@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NotificationBannerSwift
 
 class ImageCollectionViewController: UICollectionViewController {
     
@@ -88,6 +89,7 @@ class ImageCollectionViewController: UICollectionViewController {
         Task.detached { @MainActor [weak self] in
             guard let self else { return }
             let newImages = await self.vm.fetchCharacters()
+            self.showErrorMessage(message: vm.errorMessage)
             self.images.append(contentsOf: newImages)
             self.isPaginating = false
             self.updateDataSource()
@@ -99,6 +101,15 @@ class ImageCollectionViewController: UICollectionViewController {
         snapshot.appendSections([.grid])
         snapshot.appendItems(images, toSection: .grid)
         dataSource?.apply(snapshot, animatingDifferences: false)
+    }
+    
+    private func showErrorMessage(message: String?) {
+        guard let message = message else { return }
+        let banner = FloatingNotificationBanner(title: message,
+                                                style: .danger
+        )
+        banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
+                    cornerRadius: .S)
     }
 }
 

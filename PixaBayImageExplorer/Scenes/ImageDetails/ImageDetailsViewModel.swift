@@ -25,7 +25,6 @@ class ImageDetailsViewModelImpl: ImageDetailsViewModel  {
             ImageDetailsModel.init(name: "Views", description: "\(imageDetails.views)"),
             ImageDetailsModel.init(name: "Likes", description: "\(imageDetails.likes)"),
             ImageDetailsModel.init(name: "Comments", description: "\(imageDetails.comments)"),
-            ImageDetailsModel.init(name: "Favourites", description: "\(imageDetails.downloads)"), //TODO: chnage
             ImageDetailsModel.init(name: "Downloads", description: "\(imageDetails.downloads)")
         ]
     }
