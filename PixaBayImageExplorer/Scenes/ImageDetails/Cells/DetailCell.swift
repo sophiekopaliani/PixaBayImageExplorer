@@ -29,6 +29,7 @@ class DetailCell: UITableViewCell {
     private lazy var labelsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [nameLabel, descriptionLabel])
         stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
         stackView.alignment = .center
         stackView.spacing = .XS
         stackView.translatesAutoresizingMaskIntoConstraints = false

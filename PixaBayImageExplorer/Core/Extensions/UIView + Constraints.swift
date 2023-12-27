@@ -23,6 +23,10 @@ public extension UIView {
         result.isActive = true
         return result
     }
+    
+    func leftNotSafe(toView view: UIView, constant value: CGFloat = 0) {
+        self.leftAnchor.constraint(equalTo: view.leftAnchor, constant: value).isActive = true
+    }
 
     @discardableResult
     func right(toView view: UIView,
@@ -30,6 +34,10 @@ public extension UIView {
         let result = self.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -value)
         result.isActive = true
         return result
+    }
+    
+    func rightNotSafe(toView view: UIView, constant value: CGFloat = 0) {
+        self.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -value).isActive = true
     }
 
     @discardableResult

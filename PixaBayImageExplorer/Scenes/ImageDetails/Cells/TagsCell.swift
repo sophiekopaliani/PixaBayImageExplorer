@@ -27,7 +27,7 @@ class TagsCell: UITableViewCell, UIScrollViewDelegate {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isScrollEnabled = true
-        view.showsHorizontalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     
@@ -53,11 +53,11 @@ class TagsCell: UITableViewCell, UIScrollViewDelegate {
         contentContainerView.bottom(toView: contentView, constant: .M)
         contentContainerView.left(toView: contentView, constant: .M)
         contentContainerView.right(toView: contentView, constant: .M)
-        contentContainerView.delegate = self
-        
+
         badgeContainerStack.top(toView: contentContainerView)
         badgeContainerStack.bottom(toView: contentContainerView)
-        badgeContainerStack.left(toView: contentContainerView)
+        badgeContainerStack.leftNotSafe(toView: contentContainerView)
+        badgeContainerStack.rightNotSafe(toView: contentContainerView)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -71,8 +71,6 @@ class TagsCell: UITableViewCell, UIScrollViewDelegate {
     func configure(with tags: [String]) {
         badgeContainerStack.removeAllArrangedSubviews()
         for tag in tags {
-            badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
-            badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
             badgeContainerStack.addArrangedSubview(Badge(with: .init(text: tag)))
         }
     }
