@@ -24,8 +24,8 @@ class AuthorisationManagerUseCaseImpl: AuthorisationManagerUseCase {
         @Injected var userLoginGateway: UserLoginGateway
         do {
             let apiResponse = try await userLoginGateway.checkUserLoginInfo(for: email, and: password)
-            guard email == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
-            guard password == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
+            guard email.lowercased() == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
+            guard password.lowercased() == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
         } catch {
             throw error
         }
@@ -40,8 +40,8 @@ class AuthorisationManagerUseCaseImpl: AuthorisationManagerUseCase {
             let apiResponse = try await userRegistrationGateway.registerUser(with: email,
                                                                              password: password,
                                                                              age: age)
-            guard email == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
-            guard password == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
+            guard email.lowercased() == apiResponse.email else { throw ValidatorError.emailDoesNotExist }
+            guard password.lowercased() == apiResponse.password else { throw ValidatorError.passwordDoesNotMatch }
         } catch {
             throw error
         }
