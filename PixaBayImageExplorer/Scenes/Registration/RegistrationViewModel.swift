@@ -56,7 +56,7 @@ class RegistrationViewModelImpl: RegistrationViewModel {
                                                          validationMessage: emailValidationErrorMessage)}
     
     var passTextFieldModel: TextFieldModel  {.init(placeholder: "Password",
-                                                        isSecureEntry: false,
+                                                        isSecureEntry: true,
                                                         keyboardType: .default,
                                                         inputText: nil,
                                                         validationMessage: passWordValidationErrorMessage)}

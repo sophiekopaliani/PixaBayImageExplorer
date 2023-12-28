@@ -8,10 +8,15 @@
 import Foundation
 import Resolver
 
+protocol ImageCollectionViewControllerProtocol: AnyObject {
+    func reloadData()
+}
+
 protocol ImageCollectionViewModel {
+    var delegate: ImageCollectionViewControllerProtocol? { get set }
     var images: [Image] { get }
     var errorMessage: String? { get }
-    func fetchCharacters() async -> [Image]
+    func fetchCharacters()
     func getImage(by: Int) -> Image?
 }
 
@@ -19,21 +24,30 @@ class ImageCollectionViewModelImpl: ImageCollectionViewModel {
     
     @Injected var uc: ImagesUseCase
     
-    var images: [Image] = []
-    var errorMessage: String?
+    weak var delegate: ImageCollectionViewControllerProtocol?
     
+    var errorMessage: String?
     private var pageN = 0
     
-    func fetchCharacters() async -> [Image] {
-        errorMessage = nil
-        do {
-            pageN += 1
-            let newImages = try await uc.getImages(for: pageN)
-            images.append(contentsOf: newImages)
-            return newImages
-        } catch  {
-            errorMessage = (error as? ApiError)?.customDescription ?? error.localizedDescription
-            return []
+    var images: [Image] = [] {
+        didSet {
+            Task {
+                delegate?.reloadData()
+            }
+        }
+    }
+    
+    @MainActor
+    func fetchCharacters() {
+        Task {
+            errorMessage = nil
+            do {
+                pageN += 1
+                let newImages = try await uc.getImages(for: pageN)
+                images.append(contentsOf: newImages)
+            } catch  {
+                errorMessage = (error as? ApiError)?.customDescription ?? error.localizedDescription
+            }
         }
     }
     

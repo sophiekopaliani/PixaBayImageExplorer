@@ -15,6 +15,7 @@ class ImageCollectionViewController: UICollectionViewController {
     init(vm: ImageCollectionViewModel) {
         self.vm = vm
         super.init(collectionViewLayout: .init())
+        self.vm.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -28,18 +29,18 @@ class ImageCollectionViewController: UICollectionViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Image>?
     private var layout: UICollectionViewCompositionalLayout?
     
-    private var images: [Image] = []
+    private var images: [Image] { vm.images }
     private var isPaginating = true
     
     override func loadView() {
         super.loadView()
         setup()
-        updateDataSource()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchImages()
+        updateDataSource()
+        vm.fetchCharacters()
     }
     
     private func setup() {
@@ -84,31 +85,27 @@ class ImageCollectionViewController: UICollectionViewController {
             return footerView
         }
     }
-      
-    private func fetchImages() {
-        Task.detached { @MainActor [weak self] in
-            guard let self else { return }
-            let newImages = await self.vm.fetchCharacters()
-            self.showErrorMessage(message: vm.errorMessage)
-            self.images.append(contentsOf: newImages)
-            self.isPaginating = false
-            self.updateDataSource()
-        }
-    }
-    
+
     private func updateDataSource() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Image>()
         snapshot.appendSections([.grid])
         snapshot.appendItems(images, toSection: .grid)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
-    
+
     private func showErrorMessage(message: String?) {
         guard let message = message else { return }
         let banner = FloatingNotificationBanner(title: message,
                                                 style: .danger)
         banner.show(edgeInsets: .init(top: .L, left: .M, bottom: .zero, right: .M),
                     cornerRadius: .S)
+    }
+}
+
+extension ImageCollectionViewController: ImageCollectionViewControllerProtocol {
+    func reloadData() {
+        self.isPaginating = false
+        updateDataSource()
     }
 }
 
@@ -145,7 +142,7 @@ extension ImageCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.item == images.count - 1 {
             isPaginating = true
-            fetchImages()
+            vm.fetchCharacters()
         }
     }
     

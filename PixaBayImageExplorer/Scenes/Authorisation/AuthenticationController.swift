@@ -119,7 +119,9 @@ class AuthenticationController: UIViewController {
     }
     
     private func didTapLoginButton(_ action: UIAction) {
-        Task.detached { @MainActor [weak self] in
+        activityIndicator.startAnimating()
+        
+        Task { @MainActor [weak self] in
             guard let self else { return }
             do {
                 activityIndicator.startAnimating()
@@ -182,6 +184,6 @@ extension AuthenticationController {
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        bottomConstraint?.constant = -.M
+        bottomConstraint?.constant = 0
     }
 }

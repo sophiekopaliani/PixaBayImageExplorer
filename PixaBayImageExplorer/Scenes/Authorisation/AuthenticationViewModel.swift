@@ -96,6 +96,7 @@ class AuthenticationViewModelImpl: AuthenticationViewModel {
         }
     }
     
+    
     func logIn() async throws {
         do {
             try await authorisationService.loginUser(email: credentials.email,
